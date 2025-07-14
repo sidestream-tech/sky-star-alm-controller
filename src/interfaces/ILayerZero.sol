@@ -2,8 +2,8 @@
 pragma solidity >=0.8.0;
 
 struct MessagingFee {
-    uint nativeFee; // gas amount in native gas token
-    uint lzTokenFee; // gas amount in ZRO token
+    uint256 nativeFee; // gas amount in native gas token
+    uint256 lzTokenFee; // gas amount in ZRO token
 }
 
 struct MessagingReceipt {
@@ -58,7 +58,7 @@ interface ILayerZero {
     function quoteSend(
         SendParam calldata _sendParam,
         bool _payInLzToken
-    ) external returns (MessagingFee memory msgFee);
+    ) external view returns (MessagingFee memory msgFee);
 
     function send(
         SendParam calldata _sendParam,
@@ -67,5 +67,7 @@ interface ILayerZero {
     ) external payable returns (MessagingReceipt memory msgReceipt, OFTReceipt memory oftReceipt);
 
     function token() external view returns (address);
+
+    function approvalRequired() external pure returns (bool);
 
 }
